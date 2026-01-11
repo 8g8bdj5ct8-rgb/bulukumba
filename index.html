@@ -9,25 +9,27 @@
             background: linear-gradient(135deg, #FFC0CB 0%, #FFB6C1 50%, #E6E6FA 100%);
             color: #4B0082; font-family: 'Arial', sans-serif; margin: 0; overflow: hidden; height: 100vh;
         }
-        .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 20px; box-sizing: border-box; }
+        .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 25px; box-sizing: border-box; }
         .active { display: flex; flex-direction: column; justify-content: center; align-items: center; animation: fadeIn 0.8s; }
         
-        img { border: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); position: absolute; }
-        .img-l { width: 130px; } .img-s { width: 90px; }
-
-        /* Posisi sebar animasi sesuai permintaan sebelumnya */
-        .tl { top: 5%; left: 5%; } .tr { top: 5%; right: 5%; }
-        .bl { bottom: 15%; left: 5%; } .br { bottom: 15%; right: 5%; }
-        .mid-bot { bottom: 8%; left: 50%; transform: translateX(-50%); width: 140px; }
-
-        .text-box { text-align: center; max-width: 300px; z-index: 10; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; backdrop-filter: blur(5px); }
-        h2 { font-size: 22px; margin-bottom: 10px; }
-        p { font-size: 15px; font-weight: 600; line-height: 1.4; }
+        img { border: none !important; position: absolute; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
         
-        button { background: #4B0082; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; z-index: 20; }
+        /* Ukuran Gambar */
+        .img-l { width: 130px; } .img-s { width: 95px; }
+
+        /* Posisi Sebar Animasi */
+        .tl { top: 8%; left: 8%; } .tr { top: 8%; right: 8%; }
+        .bl { bottom: 15%; left: 8%; } .br { bottom: 15%; right: 8%; }
+        .mid-bot { bottom: 10%; left: 50%; transform: translateX(-50%); width: 145px; }
+
+        .text-box { text-align: center; max-width: 300px; z-index: 10; background: rgba(255,255,255,0.25); padding: 25px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
+        h2 { font-size: 24px; margin: 0 0 10px 0; }
+        p { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0; }
+        
+        button { background: #4B0082; color: white; border: none; padding: 16px 35px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 25px; z-index: 20; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .wrong-btn { background: #ff6b6b; margin-top: 10px; width: 100%; }
         
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .glow { animation: pulse 1.5s infinite; background: linear-gradient(45deg, #4B0082, #9d50bb); }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     </style>
@@ -38,18 +40,16 @@
 
     <div id="slide1" class="slide active">
         <img src="rarity1a.gif" class="img-l tl">
-        <img src="rarity1b.gif" class="img-l br">
         <div class="text-box">
             <h2>Ehem... 🙄</h2>
             <p>Cuma mau ngetes satu hal. Kamu itu orangnya peka banget atau emang cuek?</p>
         </div>
+        <img src="rarity1b.gif" class="img-l br">
         <button onclick="mulai()">Tes Kepekaan</button>
     </div>
 
     <div id="slide2" class="slide">
-        <img src="rarity2a.jpeg" class="img-l tr">
-        <img src="rarity2b.gif" class="img-s bl">
-        <div class="text-box">
+        <img src="rarity2b.gif" class="img-l tr"> <div class="text-box">
             <h3>Tes Insting!</h3>
             <p>Menurut instingmu, detik ini aku lagi di mana?</p>
             <button class="wrong-btn" onclick="salah(this)">Barru lah pasti</button>
@@ -66,16 +66,16 @@
             <p>Insting kamu serem... Tapi kalau aku bilang aku beneran di sini sekarang, kamu percaya nggak?</p>
         </div>
         <img src="rarity3b.gif" class="mid-bot">
-        <button onclick="nextSlide(4)" style="margin-top: 150px; position: relative;">Bohong! Buktiin!</button>
+        <button onclick="nextSlide(4)" style="margin-top: 160px; position: relative;">Bohong! Buktiin!</button>
     </div>
 
     <div id="slide4" class="slide">
         <img src="rarity4a.gif" class="img-l tl">
-        <img src="rarity4b.gif" class="img-l br">
         <div class="text-box">
             <h2>Challenge Accepted! 😎</h2>
-            <p>Daripada debat di chat, mending cek sendiri. Aku kirim titik rahasiaku ke WA kamu ya? Samperin kalau berani!</p>
+            <p>Daripada debat di chat, mending cek sendiri. Aku kirim titik rahasiaku ke WA ya? Samperin kalau berani!</p>
         </div>
+        <img src="rarity4b.gif" class="img-l br">
         <button class="glow" onclick="kirimWA()">CEK TITIK RAHASIA</button>
     </div>
 
@@ -83,7 +83,7 @@
         var audio = document.getElementById('lagu');
 
         function mulai() {
-            audio.play().catch(e => {});
+            audio.play().catch(e => { console.log("Musik butuh klik user"); });
             nextSlide(2);
         }
 
@@ -99,12 +99,14 @@
         }
 
         function kirimWA() {
-            // Matikan musik seketika sebelum pindah ke WA
+            // MATIKAN MUSIK SEBELUM KE WA
             audio.pause();
-            audio.currentTime = 0; 
-
-            const pesan = encodeURIComponent("Tuh kan beneran di Bulukumba! Ini lokasiku sekarang, samperin sini kalau berani: https://maps.app.goo.gl/ofjUjxcjimUkqaDW8");
-            window.location.href = "https://wa.me/628229282261?text=" + pesan;
+            
+            const nomorWA = "628229282261";
+            const linkMaps = "https://maps.app.goo.gl/ofjUjxcjimUkqaDW8";
+            const pesan = encodeURIComponent("Tuh kan beneran di Bulukumba! Ini lokasiku sekarang, samperin sini kalau berani: " + linkMaps);
+            
+            window.location.href = "https://wa.me/" + nomorWA + "?text=" + pesan;
         }
     </script>
 </body>
