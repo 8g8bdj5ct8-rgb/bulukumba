@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>???</title>
+    <style>
+        body { background-color: #FFC0CB; color: #4B0082; font-family: 'Arial', sans-serif; text-align: center; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 90%; max-width: 400px; display: none; background: rgba(255, 255, 255, 0.4); padding: 25px; border-radius: 25px; backdrop-filter: blur(12px); border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .active { display: block; animation: fadeIn 0.8s ease-out; }
+        .img-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        img { width: 110px; border-radius: 12px; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { font-size: 22px; margin-bottom: 10px; }
+        p { font-size: 15px; margin-bottom: 20px; font-weight: 500; line-height: 1.5; }
+        button { background-color: #4B0082; color: white; border: none; padding: 15px; border-radius: 30px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; transition: 0.3s; }
+        .wrong-btn { background-color: #ff6b6b; margin-top: 10px; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .glow { background: linear-gradient(45deg, #4B0082, #8A2BE2); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <audio id="lagu" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="slide1" class="container active">
+        <div class="img-grid">
+            <img src="rarity1a.gif">
+            <img src="rarity1b.gif">
+        </div>
+        <h2>Ehem... 🙄</h2>
+        <p>Cuma mau ngetes satu hal. Kamu itu orangnya peka banget atau emang cuek? Coba klik di bawah.</p>
+        <button onclick="mulai()">Tes Kepekaan</button>
+    </div>
+
+    <div id="slide2" class="container">
+        <div class="img-grid">
+            <img src="rarity2a.jpg">
+            <img src="rarity2b.gif">
+        </div>
+        <h3>Tes Insting!</h3>
+        <p>Menurut instingmu, detik ini aku lagi di mana?</p>
+        <button id="b1" class="wrong-btn" onclick="salah('b1')">Barru lah pasti</button>
+        <button id="b2" class="wrong-btn" onclick="salah('b2')">Lagi kerja keras</button>
+        <button onclick="nextSlide(3)">Lagi di Bulukumba?</button>
+    </div>
+
+    <div id="slide3" class="container">
+        <div class="img-grid">
+            <img src="rarity3a.gif">
+            <img src="rarity3b.gif">
+            <img src="rarity3c.gif">
+        </div>
+        <h3>Loh, kok tau? 📍</h3>
+        <p>Insting kamu serem juga ya... Tapi kalau aku bilang aku beneran di sini sekarang cuma buat buktiin sesuatu, kamu percaya nggak? Pinkie aja sampe nunggu jawabanmu nih...</p>
+        <button onclick="nextSlide(4)">Bohong! Buktiin!</button>
+    </div>
+
+    <div id="slide4" class="container">
+        <div class="img-grid">
+            <img src="rarity4a.gif">
+            <img src="rarity4b.gif">
+        </div>
+        <h2>Challenge Accepted! 😎</h2>
+        <p>Daripada debat di chat, mending cek sendiri. Aku simpan "sesuatu" buat kamu di lokasi ini. Samperin kalau berani, aku tunggu 10 menit ya?</p>
+        <button class="glow" onclick="location.href='https://maps.app.goo.gl/ofjUjxcjimUkqaDW8'">CEK TITIK RAHASIA</button>
+    </div>
+
+    <script>
+        function mulai() {
+            var audio = document.getElementById('lagu');
+            audio.play().catch(function(e) { console.log("Audio play blocked"); });
+            nextSlide(2);
+        }
+        function nextSlide(n) {
+            var slides = document.getElementsByClassName('container');
+            for (var i = 0; i < slides.length; i++) { slides[i].classList.remove('active'); }
+            document.getElementById('slide' + n).classList.add('active');
+        }
+        function salah(id) {
+            alert("Instingmu payah! Coba lagi!");
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
