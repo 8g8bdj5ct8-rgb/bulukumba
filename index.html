@@ -12,24 +12,19 @@
         .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 20px; box-sizing: border-box; }
         .active { display: flex; flex-direction: column; justify-content: center; align-items: center; animation: fadeIn 0.8s; }
         
-        /* Gambar Transparan Tanpa Bingkai */
         img { border: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); position: absolute; }
-        
-        .img-large { width: 130px; }
-        .img-small { width: 90px; }
+        .img-l { width: 130px; } .img-s { width: 90px; }
 
-        /* Posisi Sebar Animasi */
-        .tl { top: 5%; left: 5%; }
-        .tr { top: 5%; right: 5%; }
-        .bl { bottom: 15%; left: 5%; }
-        .br { bottom: 15%; right: 5%; }
-        .mid-bot { bottom: 10%; left: 50%; transform: translateX(-50%); }
+        /* Posisi sebar animasi sesuai permintaan sebelumnya */
+        .tl { top: 5%; left: 5%; } .tr { top: 5%; right: 5%; }
+        .bl { bottom: 15%; left: 5%; } .br { bottom: 15%; right: 5%; }
+        .mid-bot { bottom: 8%; left: 50%; transform: translateX(-50%); width: 140px; }
 
         .text-box { text-align: center; max-width: 300px; z-index: 10; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; backdrop-filter: blur(5px); }
-        h2 { font-size: 22px; margin: 0 0 10px 0; }
-        p { font-size: 15px; font-weight: 600; line-height: 1.4; margin: 0; }
+        h2 { font-size: 22px; margin-bottom: 10px; }
+        p { font-size: 15px; font-weight: 600; line-height: 1.4; }
         
-        button { background: #4B0082; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; z-index: 20; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        button { background: #4B0082; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; z-index: 20; }
         .wrong-btn { background: #ff6b6b; margin-top: 10px; width: 100%; }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -42,8 +37,8 @@
     <audio id="lagu" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 
     <div id="slide1" class="slide active">
-        <img src="rarity1a.gif" class="img-large tl">
-        <img src="rarity1b.gif" class="img-large br">
+        <img src="rarity1a.gif" class="img-l tl">
+        <img src="rarity1b.gif" class="img-l br">
         <div class="text-box">
             <h2>Ehem... 🙄</h2>
             <p>Cuma mau ngetes satu hal. Kamu itu orangnya peka banget atau emang cuek?</p>
@@ -52,57 +47,64 @@
     </div>
 
     <div id="slide2" class="slide">
-        <img src="rarity2a.jpg" class="img-large tr">
-        <img src="rarity2b.gif" class="img-small bl">
+        <img src="rarity2a.jpeg" class="img-l tr">
+        <img src="rarity2b.gif" class="img-s bl">
         <div class="text-box">
             <h3>Tes Insting!</h3>
             <p>Menurut instingmu, detik ini aku lagi di mana?</p>
-            <button id="b1" class="wrong-btn" onclick="salah('b1')">Barru lah pasti</button>
-            <button id="b2" class="wrong-btn" onclick="salah('b2')">Lagi kerja keras</button>
+            <button class="wrong-btn" onclick="salah(this)">Barru lah pasti</button>
+            <button class="wrong-btn" onclick="salah(this)">Lagi kerja keras</button>
             <button onclick="nextSlide(3)">Lagi di Bulukumba?</button>
         </div>
     </div>
 
     <div id="slide3" class="slide">
-        <img src="rarity3a.gif" class="img-small tl">
-        <img src="rarity3c.gif" class="img-small tr">
+        <img src="rarity3a.gif" class="img-s tl">
+        <img src="rarity3c.gif" class="img-s tr">
         <div class="text-box">
             <h3>Loh, kok tau? 📍</h3>
             <p>Insting kamu serem... Tapi kalau aku bilang aku beneran di sini sekarang, kamu percaya nggak?</p>
         </div>
-        <img src="rarity3b.gif" class="img-large mid-bot">
-        <button onclick="nextSlide(4)" style="position:relative; margin-top: 150px;">Bohong! Buktiin!</button>
+        <img src="rarity3b.gif" class="mid-bot">
+        <button onclick="nextSlide(4)" style="margin-top: 150px; position: relative;">Bohong! Buktiin!</button>
     </div>
 
     <div id="slide4" class="slide">
-        <img src="rarity4a.gif" class="img-large tl">
-        <img src="rarity4b.gif" class="img-large br">
+        <img src="rarity4a.gif" class="img-l tl">
+        <img src="rarity4b.gif" class="img-l br">
         <div class="text-box">
             <h2>Challenge Accepted! 😎</h2>
             <p>Daripada debat di chat, mending cek sendiri. Aku kirim titik rahasiaku ke WA kamu ya? Samperin kalau berani!</p>
         </div>
-        <button class="glow" onclick="kirimKeWA()">CEK TITIK RAHASIA</button>
+        <button class="glow" onclick="kirimWA()">CEK TITIK RAHASIA</button>
     </div>
 
     <script>
+        var audio = document.getElementById('lagu');
+
         function mulai() {
-            document.getElementById('lagu').play().catch(e => {});
+            audio.play().catch(e => {});
             nextSlide(2);
         }
+
         function nextSlide(n) {
             var slides = document.getElementsByClassName('slide');
             for (var i = 0; i < slides.length; i++) { slides[i].classList.remove('active'); }
             document.getElementById('slide' + n).classList.add('active');
         }
-        function salah(id) {
+
+        function salah(btn) {
             alert("Instingmu payah! Coba lagi!");
-            document.getElementById(id).style.display = 'none';
+            btn.style.display = 'none';
         }
-        function kirimKeWA() {
-            const nomor = "6282292822610";
-            const link = "https://maps.app.goo.gl/ofjUjxcjimUkqaDW8";
-            const pesan = encodeURIComponent("Tuh kan beneran di Bulukumba! Ini lokasiku sekarang, samperin sini kalau berani: " + link);
-            window.location.href = "https://wa.me/" + nomor + "?text=" + pesan;
+
+        function kirimWA() {
+            // Matikan musik seketika sebelum pindah ke WA
+            audio.pause();
+            audio.currentTime = 0; 
+
+            const pesan = encodeURIComponent("Tuh kan beneran di Bulukumba! Ini lokasiku sekarang, samperin sini kalau berani: https://maps.app.goo.gl/ofjUjxcjimUkqaDW8");
+            window.location.href = "https://wa.me/628229282261?text=" + pesan;
         }
     </script>
 </body>
