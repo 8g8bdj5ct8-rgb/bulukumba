@@ -3,37 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>???</title>
+    <title>Surprise!</title>
     <style>
-        /* Latar tidak polos - Gradasi Estetik */
         body { 
             background: linear-gradient(135deg, #FFC0CB 0%, #FFB6C1 50%, #E6E6FA 100%);
             color: #4B0082; font-family: 'Arial', sans-serif; margin: 0; overflow: hidden; height: 100vh;
         }
-        /* Dekorasi Mengambang */
-        .decor { position: absolute; opacity: 0.4; animation: float 4s infinite ease-in-out; z-index: 1; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-        .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 25px; box-sizing: border-box; z-index: 2; }
+        .slide { display: none; height: 100vh; width: 100vw; position: relative; padding: 20px; box-sizing: border-box; }
         .active { display: flex; flex-direction: column; justify-content: center; align-items: center; animation: fadeIn 0.8s; }
         
-        /* Gambar Tanpa Bingkai */
-        img { max-width: 170px; height: auto; border: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+        /* Gambar Transparan Tanpa Bingkai */
+        img { border: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); position: absolute; }
         
-        .pos-top { margin-bottom: 20px; }
-        .pos-right { align-self: flex-end; margin-right: 15px; }
-        .pos-left { align-self: flex-start; margin-left: 15px; }
-        .pos-mid { margin: 15px 0; }
+        .img-large { width: 130px; }
+        .img-small { width: 90px; }
 
-        .text-box { text-align: center; max-width: 350px; }
-        h2 { font-size: 24px; margin: 10px 0; }
-        p { font-size: 16px; line-height: 1.5; font-weight: 600; }
+        /* Posisi Sebar Animasi */
+        .tl { top: 5%; left: 5%; }
+        .tr { top: 5%; right: 5%; }
+        .bl { bottom: 15%; left: 5%; }
+        .br { bottom: 15%; right: 5%; }
+        .mid-bot { bottom: 10%; left: 50%; transform: translateX(-50%); }
+
+        .text-box { text-align: center; max-width: 300px; z-index: 10; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; backdrop-filter: blur(5px); }
+        h2 { font-size: 22px; margin: 0 0 10px 0; }
+        p { font-size: 15px; font-weight: 600; line-height: 1.4; margin: 0; }
         
-        button { 
-            background: #4B0082; color: white; border: none; padding: 16px 32px; border-radius: 50px; 
-            cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 20px;
-        }
-        .wrong-btn { background: #ff6b6b; margin-top: 10px; width: 220px; }
+        button { background: #4B0082; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; z-index: 20; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .wrong-btn { background: #ff6b6b; margin-top: 10px; width: 100%; }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .glow { animation: pulse 1.5s infinite; background: linear-gradient(45deg, #4B0082, #9d50bb); }
@@ -42,13 +39,11 @@
 </head>
 <body>
 
-    <div class="decor" style="top:10%; left:10%;">✨</div>
-    <div class="decor" style="bottom:20%; right:15%;">🌸</div>
-
     <audio id="lagu" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 
     <div id="slide1" class="slide active">
-        <img src="rarity1a.gif" class="pos-top">
+        <img src="rarity1a.gif" class="img-large tl">
+        <img src="rarity1b.gif" class="img-large br">
         <div class="text-box">
             <h2>Ehem... 🙄</h2>
             <p>Cuma mau ngetes satu hal. Kamu itu orangnya peka banget atau emang cuek?</p>
@@ -57,27 +52,31 @@
     </div>
 
     <div id="slide2" class="slide">
-        <img src="rarity2a.jpg" class="pos-right">
+        <img src="rarity2a.jpg" class="img-large tr">
+        <img src="rarity2b.gif" class="img-small bl">
         <div class="text-box">
             <h3>Tes Insting!</h3>
             <p>Menurut instingmu, detik ini aku lagi di mana?</p>
-            <button id="b1" class="wrong-btn" onclick="salah('b1')">Barru lah pasti</button><br>
-            <button id="b2" class="wrong-btn" onclick="salah('b2')">Lagi kerja keras</button><br>
+            <button id="b1" class="wrong-btn" onclick="salah('b1')">Barru lah pasti</button>
+            <button id="b2" class="wrong-btn" onclick="salah('b2')">Lagi kerja keras</button>
             <button onclick="nextSlide(3)">Lagi di Bulukumba?</button>
         </div>
     </div>
 
     <div id="slide3" class="slide">
-        <img src="rarity3b.gif" class="pos-left">
+        <img src="rarity3a.gif" class="img-small tl">
+        <img src="rarity3c.gif" class="img-small tr">
         <div class="text-box">
             <h3>Loh, kok tau? 📍</h3>
-            <p>Insting kamu serem... Tapi kalau aku bilang aku beneran di sini sekarang cuma buat buktiin sesuatu, kamu percaya nggak?</p>
+            <p>Insting kamu serem... Tapi kalau aku bilang aku beneran di sini sekarang, kamu percaya nggak?</p>
         </div>
-        <button onclick="nextSlide(4)">Bohong! Buktiin!</button>
+        <img src="rarity3b.gif" class="img-large mid-bot">
+        <button onclick="nextSlide(4)" style="position:relative; margin-top: 150px;">Bohong! Buktiin!</button>
     </div>
 
     <div id="slide4" class="slide">
-        <img src="rarity4a.gif" class="pos-mid">
+        <img src="rarity4a.gif" class="img-large tl">
+        <img src="rarity4b.gif" class="img-large br">
         <div class="text-box">
             <h2>Challenge Accepted! 😎</h2>
             <p>Daripada debat di chat, mending cek sendiri. Aku kirim titik rahasiaku ke WA kamu ya? Samperin kalau berani!</p>
@@ -90,26 +89,21 @@
             document.getElementById('lagu').play().catch(e => {});
             nextSlide(2);
         }
-
         function nextSlide(n) {
             var slides = document.getElementsByClassName('slide');
             for (var i = 0; i < slides.length; i++) { slides[i].classList.remove('active'); }
             document.getElementById('slide' + n).classList.add('active');
         }
-
         function salah(id) {
             alert("Instingmu payah! Coba lagi!");
             document.getElementById(id).style.display = 'none';
         }
-
         function kirimKeWA() {
-            const nomorKamu = "628229282261"; // Nomor WA Bos Munir
-            const linkMaps = "https://maps.app.goo.gl/ofjUjxcjimUkqaDW8";
-            const pesan = encodeURIComponent("Tuh kan beneran di Bulukumba! Ini lokasiku sekarang, samperin sini kalau berani: " + linkMaps);
-            
-            // Membuka WA dengan pesan otomatis berisi Link Maps
-            window.location.href = "https://wa.me/" + nomorKamu + "?text=" + pesan;
+            const nomor = "6282292822610";
+            const link = "https://maps.app.goo.gl/ofjUjxcjimUkqaDW8";
+            const pesan = encodeURIComponent("Tuh kan beneran di Bulukumba! Ini lokasiku sekarang, samperin sini kalau berani: " + link);
+            window.location.href = "https://wa.me/" + nomor + "?text=" + pesan;
         }
     </script>
 </body>
-</htm
+</html>
